@@ -17,8 +17,16 @@ sudo apt-get install cmake freeglut3-dev libusb-1.0-0-dev
 
 # Install Libirimager
 mkdir ~/build_libirimager && cd ~/build_libirimager
-wget ftp.evocortex.com/libirimager-7.2.0-amd64.deb
-sudo dpkg -i libirimager-7.2.0-amd64.deb
+
+ARCH=$(uname -m)
+if [ "$ARCH" = "aarch64" ]; then
+    wget ftp.evocortex.com/libirimager-7.2.0-amd64.deb
+    sudo dpkg -i libirimager-7.2.0-amd64.deb
+
+else
+    wget ftp.evocortex.com/libirimager-7.2.0-arm64.deb
+    sudo dpkg -i libirimager-7.2.0-arm64.deb
+fi
 
 # Download calibration
 sudo ir_download_calibration
